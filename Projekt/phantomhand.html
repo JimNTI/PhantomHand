@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phantom Hand Controller</title>
+  <script src="phantomhandtest.js" defer></script>
+  <link rel="stylesheet" href="phantomhand.css">
+</head>
+<body>
+  <h1>Phantom Hand Controller</h1>
+
+  <button id="connectBtn">Connect to Arduino</button>
+  <button id="leftBtn">Turn Page Left</button>
+  <button id="rightBtn">Turn Page Right</button>
+  <button id="resetBtn">Reset Counters</button>
+  <div id="log"></div>
+
+  <div class="counters">
+    <div class="counter left-counter">
+      Completed Left: <span id="leftCount">0</span>
+      <br>Pending Left: <span id="pendingLeft">0</span>
+    </div>
+    <div class="counter right-counter">
+      Completed Right: <span id="rightCount">0</span>
+      <br>Pending Right: <span id="pendingRight">0</span>
+    </div>
+  </div>
+</body>
+</html>
