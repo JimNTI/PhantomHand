@@ -88,39 +88,41 @@ void moveServo(String direction) {
     wheelServo.write(0);
     pushServo.write(180);
     positionServo.write(180);
-    delay(2000);
+    delay(500);
   } else if (direction == "left") {
     wheelServo.write(180);
     pushServo.write(0);
     positionServo.write(0);
-    delay(2000);
+    delay(500);
   }
 }
 
 void spinPage(String direction) {
   if (direction == "right") {
     wheelServo.write(180);
-    delay(1000);
+    delay(500);
   } else if (direction == "left") {
     wheelServo.write(0);
-    delay(1000);
+    delay(500);
   }
 }
 
 void pushPage(String direction) {
   if (direction == "right") {
     positionServo.write(160);
-    delay(1500);
+    delay(500);
     pushServo.write(0);
+    delay(200);
     positionServo.write(88);
-    delay(1000);
+    delay(800);
     pushServo.write(0);
   } else if (direction == "left") {
     positionServo.write(20);
-    delay(1500);
+    delay(500);
     pushServo.write(180);
+    delay(200);
     positionServo.write(88);
-    delay(1000);
+    delay(800);
     pushServo.write(0);
   }
 }

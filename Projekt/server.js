@@ -1,6 +1,7 @@
 const express = require('express');
 const WebSocket = require('ws');
 const { SerialPort } = require('serialport');
+const { ReadlineParser } = require('@serialport/parser-readline');
 
 const app = express();
 app.use(express.static(__dirname));
@@ -11,8 +12,11 @@ let arduinoPort = null;
 async function connectToArduino() {
   try {
     const ports = await SerialPort.list();
-    const arduino = ports.find(p => p.manufacturer?.includes('Arduino'));
+    const arduino = ports.find(p => p.manufacturer?.includes('Silicon Labs'));
     
+    console.log(ports);
+    console.log(arduino);
+
     if (arduino) {
       arduinoPort = new SerialPort({ 
         path: arduino.path, 
@@ -22,7 +26,7 @@ async function connectToArduino() {
       arduinoPort.on('open', () => {
         console.log(`Arduino connected at ${arduino.path}`);
         
-        const parser = arduinoPort.pipe(new require('@serialport/parser-readline')({ delimiter: '\n' }));
+                const parser = arduinoPort.pipe(new ReadlineParser({ delimiter: '\n' }));
         
         parser.on('data', (data) => {
           const msg = data.toString().trim();
@@ -57,6 +61,8 @@ wss.on('connection', (ws) => {
       arduinoPort.write(command + '\n', (err) => {
         if (err) console.error('Write error:', err);
       });
+    } else {
+      console.log("Arduino closed. ");
     }
   });
   

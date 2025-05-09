@@ -2,7 +2,7 @@ let leftCount = 0;
 let rightCount = 0;
 let pendingLeft = 0;
 let pendingRight = 0;
-const socket = new WebSocket('ws://localhost:8081');
+const socket = new WebSocket('ws://192.168.192.193:8081');
 
 // WebSocket event handlers
 socket.addEventListener('open', () => {
