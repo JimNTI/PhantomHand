@@ -34,6 +34,14 @@ socket.addEventListener('message', (event) => {
     updateCounters();
     logMessage("✔️ Right turn completed", 'completed');
   }
+    else if (msg === "x") {
+    pendingRight = 0;
+    pendingLeft = 0;
+    rightCount = 0;
+    leftCount = 0;
+    updateCounters();
+    logMessage("✔️ Everything has been reset", 'completed');
+  }
 });
 
 function updateCounters() {
@@ -70,11 +78,16 @@ async function sendCommand(command) {
       logMessage(`⏳ Queued RIGHT turn (Pending: ${pendingRight})`, 'pending');
     }
     else if (command === "reset") {
+      socket.send("x");
       leftCount = 0;
       rightCount = 0;
       pendingLeft = 0;
       pendingRight = 0;
       logMessage("🔄 Reset all counters", 'reset');
+    }
+    else if (command === "stop") {
+      socket.send("s");
+      logMessage("🔄 Stop process", 'reset');
     }
     
     updateCounters();
@@ -89,4 +102,5 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById("leftBtn").addEventListener("click", () => sendCommand("left"));
   document.getElementById("rightBtn").addEventListener("click", () => sendCommand("right"));
   document.getElementById("resetBtn").addEventListener("click", () => sendCommand("reset"));
+  document.getElementById("stopBtn").addEventListener("click", () => sendCommand("stop"));
 });
